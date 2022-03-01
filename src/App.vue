@@ -1,32 +1,51 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<v-app>
+		<sidebar />
+		<v-content app class="ma-0 ma-sm-8" color="#0C365A">
+			<router-view />
+		</v-content>
+		<v-footer app v-show="$vuetify.breakpoint.xs" class="pa-0 ma-0">
+			<v-col class="text-center pa-0">
+				<v-layout class="justify-space-around text-center">
+					<v-flex v-for="(opt, i) in items" :key="i">
+						<v-btn
+							elevation="0"
+							fab
+							small
+							@click="$router.push({ name: opt.route })"
+						>
+							<v-icon :color="opt.route === $route.name ? '#01D167' : 'grey'">{{opt.icon}}</v-icon>
+						</v-btn>
+						<p :class="selectedMenuItem(opt)" @click="$router.push({ name: opt.route })"><small v-html="opt.title"></small></p>
+					</v-flex>
+				</v-layout>
+			</v-col>
+		</v-footer>
+	</v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Sidebar from './components/Sidebar'
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+	name: 'App',
+	components: {
+		Sidebar
+	},
+	
+	data: () => ({
+		items: [
+			{ title: 'Home', icon: 'mdi-arrow-up-drop-circle', route: 'home' },
+			{ title: 'Cards', icon: 'mdi-credit-card', route: 'cards' },
+			{ title: 'Payments', icon: 'mdi-swap-horizontal-circle-outline', route: 'payments' },
+			{ title: 'Credit', icon: 'mdi-arrow-up-circle', route: 'credit' },
+			{ title: 'Settings', icon: 'mdi-account', route: 'settings' },
+		]
+	}),
+	methods: {
+		selectedMenuItem(opt) {
+			return (opt.route === this.$route.name) ? 'highlight-m' : '';
+		}
+	}
+};
+</script>

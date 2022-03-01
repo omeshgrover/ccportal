@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body, .v-application {
+    font-family: "Open Sans", sans-serif;
+}
+.link:hover {
+    cursor: pointer;
+}
+.highlight {
+    background: #01D167;
+}
+.highlight-m {
+    color: #01D167;
+}
+
+/* Expansion panels */
+.v-expansion-panel-content__wrap {
+    padding: 0;
+}
+
+.v-slide-group:not(.v-slide-group--has-affixes) > .v-slide-group__prev {
+    display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+    .theme--light.v-application, .v-window__container, .theme--light.v-tabs > .v-tabs-bar, .theme--light.v-card {
+        background: #0C365A;
+    }
+    .white-xs--text {
+        color: #ffffff !important;
+    }
+    .show-card-num {
+        background-color: #FFFFFF;
+    }
+}
